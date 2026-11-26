@@ -46,6 +46,8 @@ export class Game {
    */
   constructor(options = {}) {
     this.headless = !!options.headless;
+    this.onFirstFrame = options.onFirstFrame ?? null;
+    this._firstFrameDone = false;
     this.store = options.store ?? storage();
     this.settings = clampSettings(options.settings ?? this._loadSettings());
     this.world = options.world ?? createWorld(1986);
@@ -1461,6 +1463,10 @@ export class Game {
     this.renderer.update(delta, frame);
     if (this.cameraPos) this.renderer.applyCamera(this.cameraPos, this.cameraLook, this.inVehicle ? 68 : 62);
     this.renderer.render();
+    if (!this._firstFrameDone) {
+      this._firstFrameDone = true;
+      this.onFirstFrame?.();
+    }
 
     this.minimap.draw(delta, {
       player: { x: this.player.x, z: this.player.z, yaw: this.camYaw },

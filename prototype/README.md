@@ -66,6 +66,8 @@ node tests/run_tests.mjs        # 36 simulation checks
 node tests/contract_test.mjs    # 7 static wiring checks
 node tests/integration_test.mjs # 16 full-loop checks with stub renderer
 node tests/dom_test.mjs         # 8 HUD/input checks (needs jsdom, install --no-save)
+node tests/dom_render_test.mjs  # 6 boot/frame checks against the real index.html with a
+                                # stubbed WebGL2 context (needs jsdom)
 ```
 
 `tests/browser_smoke.mjs` drives a real Chromium for screenshots; it needs a machine with a GPU
@@ -74,9 +76,10 @@ stack (`BASE_URL=… node tests/browser_smoke.mjs`). It cannot run in a headless
 
 ## Known gaps
 
-- No GL context in the build container, so rendering was verified by contract tests and stub
-  injection, not by eye. The first thing to check on a real device is the console and the frame
-  time on the beach at night.
+- No GPU in the build container, so the renderer is verified by a stubbed WebGL2 context over the
+  real page DOM (`tests/dom_render_test.mjs`) plus contract tests, not by eye. Anything that needs
+  real pixel output — shadow acne, z-fighting between road tiles, bloom cost — still has to be
+  checked in a browser; any boot failure now prints on the loading panel instead of hanging there.
 - Art is primitive geometry with flat colours: no textures, no skinned characters, no licensed
   music. Those are content production, not code.
 - Traffic and pedestrians are simulated only within 160 m; distant roads are empty by design.

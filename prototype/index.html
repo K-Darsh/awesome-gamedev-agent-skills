@@ -7,6 +7,39 @@
 <meta name="description" content="Neon Coast: a playable open-world vehicle and mission vertical slice for the open-world city game skill." />
 <title>Neon Coast — 1986</title>
 <link rel="stylesheet" href="styles.css" />
+<script>
+  // Boot diagnostics: installed before the module script, so a failed import, a
+  // WebGL context failure or a thrown constructor shows on screen instead of a
+  // loading panel that never finishes.
+  (function () {
+    function report(kind, detail) {
+      window.__bootError = kind + ': ' + detail;
+      var label = document.getElementById('loading-text');
+      if (label) {
+        label.textContent = 'Could not start — ' + detail;
+        label.style.color = '#ff6f91';
+        label.style.maxWidth = '28rem';
+      }
+      console.error('[boot]', kind, detail);
+    }
+    window.__boot = { report: report };
+    window.addEventListener('error', function (event) {
+      if (event && event.message) report('error', event.message);
+      else if (event && event.target && event.target.src) report('error', 'failed to load ' + event.target.src);
+    }, true);
+    window.addEventListener('unhandledrejection', function (event) {
+      var reason = event && event.reason;
+      report('promise', (reason && reason.message) || String(reason));
+    });
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        if (!window.__game && !window.__bootError) {
+          report('timeout', 'the game did not start; check the console for module errors');
+        }
+      }, 6000);
+    });
+  })();
+</script>
 </head>
 <body>
 <div id="app">
