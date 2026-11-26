@@ -13,12 +13,15 @@ install — is in [`docs/production-plan.md`](docs/production-plan.md).
 
 ```bash
 cd prototype
-python3 -m http.server 8123 --bind 0.0.0.0
+python3 serve.py 8123 --bind 0.0.0.0     # or: npm run serve
 # open http://localhost:8123
 ```
 
-Any static server works; ES modules need HTTP, not `file://`. three.js r187 is vendored in
-`vendor/`, so the page has no external requests.
+`serve.py` is a threaded static server: the page loads 21 ES modules at once, and a single-threaded
+`http.server` can stall that burst. Any threaded static server works; ES modules need HTTP, not
+`file://`. three.js r187 is vendored in `vendor/`, so the page makes no external requests. The
+server sends `Cache-Control: no-store` and the correct `text/javascript` type, so a reload after an
+edit always picks up the new file.
 
 ## Controls
 
