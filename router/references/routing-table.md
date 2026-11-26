@@ -135,10 +135,17 @@ When two skills both match, the router's ownership table (§3c) decides who lead
 | `visual-novel` | visual novel, VN, dating sim, routes and endings, save-anywhere, backlog, skip read-only, typewriter text, Ren'Py; `*.rpy` | `dialogue-systems` + `save-systems` + `game-ui-ux` |
 | `survival-crafting` | survival game, Minecraft-, Valheim- or Don't Starve-like, gathering, crafting recipes, tech tree, carry weight, spoilage, hunger, temperature, base building | `save-systems` + `godot-resources`/`unity-scriptableobjects` + `procedural-gen` + `game-ui-ux` |
 | `puzzle` | puzzle game, match-3 cascades, Sokoban, nonogram/Picross, Sudoku, unique solution, exact undo, solver-checked levels, unsolvable level | `godot-tilemap`/`unity-tilemap-2d` + `level-design` + `game-feel` |
+| `open-world-city-game` | open world city, GTA- or Vice City-like, **traffic AI, sidewalk pedestrians, wanted stars, radio stations, day-night cycle, property income, cheat codes, Play Asset Delivery** (owner), drivable city, minimap, vehicle handling for a city (not a racing sim) | engine 3D (`unity-3d-essentials` / `unreal-cpp-gameplay` / `threejs-scene-setup` / `godot-3d-essentials`) + `game-ai` + `camera-systems` + `game-ui-ux` + `save-systems` + `performance-optimization` |
 
 Plain "inventory" belongs to neither genre alone: items, equipment and rarity go to `rpg`;
 gathering, stacks, weight, spoilage and recipes go to `survival-crafting`. Ask if the request
 gives no detail.
+
+Keyword traps in this group: "driving" alone is not `open-world-city-game` — a racing or rally
+request goes to the engine's vehicle/physics skill plus `physics-tuning`; a single chase sequence
+inside a linear game is `level-design`. "Open world" without a city (survival island, fantasy
+wilderness) is `survival-crafting` or `procedural-gen`. "APK size" questions about any game, not
+just this genre, can still use this skill's delivery reference, but say so when loading it.
 
 ## Workflows (`skills/workflows/`) — process & shipping, engine-independent
 

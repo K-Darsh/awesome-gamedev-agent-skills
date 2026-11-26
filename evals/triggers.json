@@ -2821,6 +2821,40 @@
     "notes": "near-miss for game-docs. near-miss: 'feature' but build request; desc says do not write docs"
   },
   {
+    "id": "open-world-city-game.s1",
+    "prompt": "GTA-style open world city for android: traffic that follows lanes and stops at lights, pedestrians on the sidewalks, and a wanted level when I hit someone",
+    "expected": [
+      "open-world-city-game"
+    ],
+    "kind": "should",
+    "notes": "should-trigger open-world-city-game. traffic + peds + wanted level"
+  },
+  {
+    "id": "open-world-city-game.s2",
+    "prompt": "Vice City-like driving game with a day-night cycle, rain, and a radio dial with stations that change while I drive",
+    "expected": [
+      "open-world-city-game"
+    ],
+    "kind": "should",
+    "notes": "should-trigger open-world-city-game. atmosphere + radio"
+  },
+  {
+    "id": "open-world-city-game.s3",
+    "prompt": "buying hotels and garages in my city game, collecting the rental income in person, and saving at homes I own",
+    "expected": [
+      "open-world-city-game"
+    ],
+    "kind": "should",
+    "notes": "should-trigger open-world-city-game. property economy + safehouse saves"
+  },
+  {
+    "id": "open-world-city-game.nm",
+    "prompt": "write a python script that scrapes GTA wiki pages for vehicle stats into a csv",
+    "expected": [],
+    "kind": "near-miss",
+    "notes": "near-miss for open-world-city-game. mentions GTA vehicles but is web scraping work; no skill"
+  },
+  {
     "id": "combo.01",
     "prompt": "rebirths in my roblox simulator take forever AND exploiters keep firing the rebirth remote to skip the cost",
     "expected": [

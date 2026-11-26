@@ -4,10 +4,10 @@
 
 <p align="center">
   <img src="docs/assets/awesome-gamedev-agent-skills-banner.png" width="820"
-       alt="awesome-gamedev-agent-skills — game-dev skills for AI coding agents. 79 skills and a router across 12 engines, including an art-direction and asset-production workflow.">
+       alt="awesome-gamedev-agent-skills — game-dev skills for AI coding agents. 80 skills and a router across 12 engines, including an art-direction and asset-production workflow.">
 </p>
 
-**Make games with your AI coding agent, in the engine you already use.** 79 skills for 12
+**Make games with your AI coding agent, in the engine you already use.** 80 skills for 12
 engines: say what you're building, and a router loads the right 2 or 3 skills before your agent
 writes code.
 
@@ -19,13 +19,13 @@ npx skills add gamedev-skills/awesome-gamedev-agent-skills
 [![skills.sh installs](https://skills.sh/b/gamedev-skills/awesome-gamedev-agent-skills)](https://skills.sh/gamedev-skills/awesome-gamedev-agent-skills)
 [![Engines checked](https://img.shields.io/badge/engines%20checked-2026--11--11-brightgreen)](docs/VERSION-SUPPORT.md)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-79%20%2B%20router-brightgreen)](skills/)
+[![Skills](https://img.shields.io/badge/skills-80%20%2B%20router-brightgreen)](skills/)
 [![Format](https://img.shields.io/badge/format-Agent%20Skills-informational)](docs/SKILL-FORMAT.md)
 [![Last commit](https://img.shields.io/github/last-commit/gamedev-skills/awesome-gamedev-agent-skills)](https://github.com/gamedev-skills/awesome-gamedev-agent-skills/commits/main)
 [![Sponsor](https://img.shields.io/badge/sponsor-this%20project-ea4aaa)](#sponsors)
 
 [Agent Skills](docs/SKILL-FORMAT.md) are small capability files an AI agent loads only when it
-needs them. This repo gives your agent **79 game-dev skills** and a **router** that picks the
+needs them. This repo gives your agent **80 game-dev skills** and a **router** that picks the
 right ones for you. You describe what you're building; the agent loads the matching engine and
 task skills before it writes code.
 
@@ -81,7 +81,7 @@ skills the router picks.
 ## Quick start
 
 **One command, any agent.** The [`skills`](https://www.npmjs.com/package/skills) CLI detects the
-coding agent you already use and installs the router plus all 79 skills into the right place:
+coding agent you already use and installs the router plus all 80 skills into the right place:
 
 ```bash
 npx skills add gamedev-skills/awesome-gamedev-agent-skills
@@ -168,7 +168,7 @@ engine), while disciplines, genres, and workflows are additive on top.
 
 ## Catalog
 
-79 skills across 9 categories — each links to its `SKILL.md` below.
+80 skills across 9 categories — each links to its `SKILL.md` below.
 
 ### Engines
 
@@ -274,7 +274,7 @@ Cross-engine concepts that load alongside the detected engine skill.
 | [`camera-systems`](skills/disciplines/camera-systems/SKILL.md) | 2D follow with deadzone and look-ahead, third-person orbit, first-person look, split-screen |
 | [`performance-optimization`](skills/disciplines/performance-optimization/SKILL.md) | Measure first: CPU- vs GPU-bound, then the biggest fix (draw calls, pooling, GC spikes) |
 
-### Genres — 9 ([`skills/genres/`](skills/genres/))
+### Genres — 10 ([`skills/genres/`](skills/genres/))
 
 Compositional templates that orchestrate engine + discipline skills; they never re-teach
 primitives.
@@ -289,6 +289,7 @@ primitives.
 | [`card-game`](skills/genres/card-game/SKILL.md) | Cards as data with one effect interpreter, deck zones, trigger stack, seeded shuffles, roguelike deckbuilders |
 | [`visual-novel`](skills/genres/visual-novel/SKILL.md) | Routes and endings, save-anywhere, backlog, skip-read-only, typewriter text (Ren'Py or any engine) |
 | [`survival-crafting`](skills/genres/survival-crafting/SKILL.md) | Gathering, recipes and tech trees, carry weight, spoilage, needs, base building |
+| [`open-world-city-game`](skills/genres/open-world-city-game/SKILL.md) | Districts, streaming, arcade vehicle handling, traffic and pedestrians, day-night and radio, mission and property economy, touch controls, and the Play Asset Delivery budget for a city-sized mobile game |
 | [`puzzle`](skills/genres/puzzle/SKILL.md) | Match-3 cascades, Sokoban, unique-solution grids, exact undo, solver-checked levels |
 
 ### Workflows — 5 ([`skills/workflows/`](skills/workflows/))
@@ -373,7 +374,7 @@ func _physics_process(delta: float) -> void:
 ## Repository layout
 
 ```
-skills/        79 specialized skills, grouped by engine / discipline / genre / workflow
+skills/        80 specialized skills, grouped by engine / discipline / genre / workflow
 router/        the master router skill (+ references/)
 docs/          authoring standard, installation, compatibility
 templates/     SKILL.md template

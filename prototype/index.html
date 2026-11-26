@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+<meta name="theme-color" content="#12081c" />
+<meta name="description" content="Neon Coast: a playable open-world vehicle and mission vertical slice for the open-world city game skill." />
+<title>Neon Coast — 1986</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="app">
+  <canvas id="game" aria-label="Game viewport"></canvas>
+  <div id="vignette"></div>
+
+  <div id="hud">
+    <div id="top-left">
+      <div class="panel status">
+        <div id="cash">$1,500</div>
+        <div id="wanted" aria-label="Wanted level"></div>
+        <div class="row small"><span id="clock">08:30</span><span id="weather">CLEAR</span><span id="district">MIDTOWN</span></div>
+      </div>
+      <div id="mission-panel" class="panel hidden">
+        <div class="label">OBJECTIVE</div>
+        <div id="mission-text">—</div>
+        <div id="mission-timer" class="small"></div>
+      </div>
+      <div id="subtitle" class="hidden">
+        <span id="subtitle-speaker"></span>
+        <p id="subtitle-text"></p>
+        <div id="subtitle-choices"></div>
+      </div>
+    </div>
+
+    <div id="top-right">
+      <div id="minimap-wrap">
+        <canvas id="minimap" width="180" height="180"></canvas>
+        <div id="vitals">
+          <div class="bar armor"><i id="armor-fill"></i></div>
+          <div class="bar health"><i id="health-fill"></i></div>
+        </div>
+      </div>
+      <div id="radio-widget" class="panel">
+        <span id="radio-station">Neon 88</span>
+        <span id="radio-tagline">synthwave</span>
+      </div>
+    </div>
+
+    <div id="quick">
+      <button data-ui="phone" aria-label="Jobs and property">JOBS</button>
+      <button data-ui="cheat" aria-label="Cheat codes">CODES</button>
+      <button data-ui="radio" aria-label="Radio">RADIO</button>
+      <button data-ui="pause" aria-label="Menu">MENU</button>
+    </div>
+
+    <div id="stick-zone"><div id="stick-ring"></div><div id="stick-knob"></div></div>
+    <div id="buttons">
+      <button id="btn-fire" class="round big" data-action="fire">FIRE</button>
+      <button class="round" data-action="enter" id="btn-enter">ENTER</button>
+      <button class="round" data-action="sprint" id="btn-sprint">RUN</button>
+      <button class="round" data-action="jump" id="btn-jump">JUMP</button>
+      <button class="round" data-action="reload" id="btn-reload">LOAD</button>
+    </div>
+    <div id="look-hint" class="small">drag to look</div>
+
+    <div id="speedo" class="hidden">
+      <span id="speed-value">0</span><small>km/h</small>
+      <div id="gear">D</div>
+      <div id="nitro"><i></i></div>
+    </div>
+
+    <div id="crosshair" class="hidden"></div>
+    <div id="toasts" aria-live="polite"></div>
+    <div id="fps" class="hidden">60 fps</div>
+  </div>
+
+  <div id="panel-layer" class="hidden">
+    <div class="panel-wrap" id="panel-intro">
+      <h1>NEON<span>COAST</span></h1>
+      <p class="lede">Vice-style open world, 1986. Drive, fly, sail, run jobs, buy property and save at your own safehouse — all offline in one page.</p>
+      <div class="btn-row">
+        <button class="primary" data-do="start">Start game</button>
+        <button data-do="help">Controls</button>
+      </div>
+      <p class="fineprint">Fan-made systems demo for the <em>open-world-city-game</em> skill. No Rockstar assets, no multiplayer, no abusive language. Keyboard on desktop; touch controls appear on phones.</p>
+    </div>
+
+    <div class="panel-wrap hidden" id="panel-pause">
+      <h2>Paused</h2>
+      <div class="btn-col">
+        <button class="primary" data-do="resume">Resume</button>
+        <button data-do="save">Save game</button>
+        <button data-do="settings">Settings</button>
+        <button data-do="help">Controls</button>
+        <button data-do="restart" class="danger">Restart from title</button>
+      </div>
+      <p class="fineprint" id="save-note">Saving needs one of your own properties.</p>
+    </div>
+
+    <div class="panel-wrap hidden" id="panel-settings">
+      <h2>Settings</h2>
+      <div class="settings-grid">
+        <label>Quality preset
+          <select id="set-quality">
+            <option value="performance">Performance</option>
+            <option value="balanced">Balanced</option>
+            <option value="quality">Quality</option>
+            <option value="auto">Auto (adaptive)</option>
+          </select>
+        </label>
+        <label>Resolution scale <output id="out-render"></output>
+          <input id="set-render" type="range" min="0.5" max="1.5" step="0.05" />
+        </label>
+        <label>Draw distance <output id="out-draw"></output>
+          <input id="set-draw" type="range" min="300" max="1600" step="50" />
+        </label>
+        <label>Frame cap
+          <select id="set-fps">
+            <option value="30">30 fps</option>
+            <option value="60">60 fps</option>
+            <option value="90">90 fps</option>
+            <option value="120">120 fps</option>
+          </select>
+        </label>
+        <label>Look sensitivity <output id="out-sens"></output>
+          <input id="set-sens" type="range" min="0.25" max="2.5" step="0.05" />
+        </label>
+        <label>Stick size <output id="out-stick"></output>
+          <input id="set-stick" type="range" min="0.7" max="1.6" step="0.05" />
+        </label>
+        <label>Music <output id="out-music"></output>
+          <input id="set-music" type="range" min="0" max="1" step="0.05" />
+        </label>
+        <label>Effects <output id="out-sfx"></output>
+          <input id="set-sfx" type="range" min="0" max="1" step="0.05" />
+        </label>
+        <label class="check"><input id="set-shadows" type="checkbox" /> Shadows</label>
+        <label class="check"><input id="set-minimap" type="checkbox" /> Minimap</label>
+        <label class="check"><input id="set-touch" type="checkbox" /> Touch controls</label>
+        <label class="check"><input id="set-fpsview" type="checkbox" /> FPS counter</label>
+      </div>
+      <div class="btn-row"><button class="primary" data-do="settings-done">Done</button></div>
+    </div>
+
+    <div class="panel-wrap hidden" id="panel-cheats">
+      <h2>Cheat codes</h2>
+      <p class="fineprint">Type a code and press Enter, just like the classic keyboard cheat. Codes ignore case and spaces.</p>
+      <form id="cheat-form" autocomplete="off">
+        <input id="cheat-input" type="text" placeholder="TYPE A CODE…" autocapitalize="characters" spellcheck="false" inputmode="text" />
+        <button class="primary" type="submit">Enter</button>
+      </form>
+      <div class="chips" id="cheat-suggestions"></div>
+      <p class="fineprint" id="cheat-result"></p>
+      <button data-do="close">Close</button>
+    </div>
+
+    <div class="panel-wrap hidden" id="panel-radio">
+      <h2>Radio</h2>
+      <div id="station-list" class="station-list"></div>
+      <button data-do="close">Close</button>
+    </div>
+
+    <div class="panel-wrap wide hidden" id="panel-phone">
+      <h2>Phone</h2>
+      <div class="tabs">
+        <button class="tab active" data-tab="jobs">Jobs</button>
+        <button class="tab" data-tab="property">Property</button>
+        <button class="tab" data-tab="garage">Garage</button>
+      </div>
+      <div id="tab-jobs" class="tab-body"></div>
+      <div id="tab-property" class="tab-body hidden"></div>
+      <div id="tab-garage" class="tab-body hidden"></div>
+      <button data-do="close">Close</button>
+    </div>
+
+    <div class="panel-wrap wide hidden" id="panel-shop">
+      <h2 id="shop-title">Shop</h2>
+      <p class="fineprint" id="shop-sub"></p>
+      <div id="shop-body"></div>
+      <button data-do="close">Close</button>
+    </div>
+
+    <div class="panel-wrap hidden" id="panel-help">
+      <h2>Controls</h2>
+      <div class="help-grid">
+        <div><b>On foot</b><br />WASD / stick to move · Shift to sprint · Space to jump · F to fire · R to reload · E to enter vehicles</div>
+        <div><b>Driving</b><br />W/S throttle and brake · A/D steer · Space handbrake · E to exit · Q radio</div>
+        <div><b>Flying</b><br />Stick raises/lowers collective in a helicopter, pitches a plane; A/D yaw or bank · Space to brake</div>
+        <div><b>Touch</b><br />Left stick moves · drag the view to look · FIRE, ENTER, RUN, JUMP and LOAD buttons on the right · MENU for jobs, codes and settings</div>
+        <div><b>Cheats</b><br />Type codes in CODES (or press the backquote key): ASPIRINE, LEAVEMEALONE, COMETOYSIDE, AIRSHIP, SKYHIGH, STORMY</div>
+      </div>
+      <button data-do="close">Close</button>
+    </div>
+
+    <div class="panel-wrap hidden" id="panel-death">
+      <h1 class="wasted">WASTED</h1>
+      <p id="death-text">You wake up outside the hospital. The bill is $250.</p>
+      <button class="primary" data-do="respawn">Get up</button>
+    </div>
+  </div>
+
+  <div id="loading">
+    <div class="loading-mark">NEON COAST</div>
+    <div class="loading-bar"><i id="loading-fill"></i></div>
+    <div id="loading-text" class="small">Building the city…</div>
+  </div>
+</div>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>

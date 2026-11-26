@@ -1,0 +1,27 @@
+{
+  "name": "neon-coast-prototype",
+  "version": "1.0.0",
+  "description": "Three.js open-world city vertical slice: driving, traffic, pedestrians, weather, missions, property economy and touch UI.",
+  "main": "src/main.js",
+  "type": "module",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "serve": "python3 -m http.server 8123 --bind 0.0.0.0",
+    "test": "node tests/run_tests.mjs && node tests/contract_test.mjs && node tests/integration_test.mjs",
+    "test:dom": "node tests/dom_test.mjs",
+    "test:browser": "node tests/browser_smoke.mjs"
+  },
+  "keywords": [
+    "threejs",
+    "open-world",
+    "prototype",
+    "gamedev"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "three": "^0.187.0"
+  }
+}

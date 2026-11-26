@@ -5,6 +5,18 @@ and releases use [semantic versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- **`open-world-city-game`** genre skill (80 skills total): districts, streaming cells, arcade
+  vehicle handling across eight classes, lane-graph traffic with signals, sidewalk pedestrians,
+  day-night and weather, radio, data-driven missions with checkpoints, property income, safehouse
+  saves and touch controls — plus a verified Play Asset Delivery plan for a city-sized Android
+  build, copy-ready asset-pack Gradle files, and `scripts/check_ship_budgets.py`, which gates a
+  content manifest against Play's 200 MB/1.5 GB/4 GB/8 GB limits and mobile draw-call, triangle and
+  texture budgets. Tests in `tests/test_ship_budgets.py`.
+- Trigger evals for the new skill: three `should` prompts and one near-miss (`evals/triggers.json`,
+  370 prompts).
+
 ## [2.0.0] - 2026-11-11
 
 ### v2 quality release

@@ -97,8 +97,9 @@ After the engine, read the request for task signals (three **additive** categori
   Triggered by concept words ("sprite sheet", "pathfinding", "behavior tree", "save slots",
   "dissolve shader", "screen shake", "camera follow", "HUD/menu", "low FPS", "stutter").
 - **genres** (whole-game templates): `platformer`, `roguelike`, `rpg`, `fps-shooter`,
-  `tower-defense`, `card-game`, `visual-novel`, `survival-crafting`, `puzzle`. Triggered by genre
-  words or a reference game ("make a roguelike", "Celeste-like", "deckbuilder").
+  `tower-defense`, `card-game`, `visual-novel`, `survival-crafting`, `puzzle`,
+  `open-world-city-game`. Triggered by genre words or a reference game ("make a roguelike",
+  "Celeste-like", "deckbuilder", "GTA-style city").
 - **workflows** (process/shipping): `game-jam`, `prototype-fast`, `steam-publish`,
   `itch-publish`, `game-docs`. Triggered by process words ("publish on Steam", "is this fun",
   "48-hour jam", "draft a GDD"). Add `game-docs` only when the user asks for docs or the project
@@ -215,6 +216,7 @@ the engine skill together, then only the disciplines the request needs.
 | visual novel, dating sim, branching story, Ren'Py | `dialogue-systems` + `save-systems` + `game-ui-ux` |
 | survival, crafting, gathering, carry weight, spoilage | `save-systems` + `godot-resources`/`unity-scriptableobjects` + `procedural-gen` + `game-ui-ux` |
 | puzzle, match-3, Sokoban, grid logic, undo | `godot-tilemap`/`unity-tilemap-2d` + `level-design` + `game-feel` |
+| open world city, GTA- or Vice City-like, driving, traffic, pedestrians, day-night, radio, wanted level, property economy, Android asset packs | engine 3D + `game-ai` (traffic, peds, police) + `camera-systems` + `game-ui-ux` + `save-systems`; add `performance-optimization` for phone budgets and `level-design` for street readability |
 
 ### 3e. Workflows — engine-independent process & shipping
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- pack_city_02/src/main/AndroidManifest.xml — asset packs carry no code. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.neoncoast.pack.city02">
+    <application android:hasCode="false" />
+</manifest>

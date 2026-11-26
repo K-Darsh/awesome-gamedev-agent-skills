@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "game": "neon-coast",
+  "artifact": "aab",
+  "level_up": false,
+  "target_fps": 60,
+  "min_device_ram_gb": 6,
+  "modules": [
+    { "id": "base", "kind": "base", "size_mb": 118 },
+    { "id": "pack_city_02", "kind": "fast-follow", "size_mb": 900 },
+    { "id": "pack_city_03", "kind": "fast-follow", "size_mb": 760 },
+    { "id": "pack_vehicles", "kind": "fast-follow", "size_mb": 420 },
+    { "id": "pack_audio", "kind": "on-demand", "size_mb": 300 },
+    { "id": "pack_airport", "kind": "on-demand", "size_mb": 480 }
+  ],
+  "perf": { "draw_calls": 118, "triangles": 286000, "texture_mb": 205, "gc_bytes_frame": 0 },
+  "content": {
+    "districts": 4,
+    "vehicles": 12,
+    "missions": 8,
+    "properties": 6,
+    "texture_format": "astc",
+    "audio_kbps": 128
+  }
+}
